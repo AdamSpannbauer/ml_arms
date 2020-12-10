@@ -1,0 +1,25 @@
+{
+  "name": "ml_arms",
+  "version": "1.0.0",
+  "description": "💪s that teach themselves motor skills right before your 👀",
+  "main": "sketch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamSpannbauer/ml_arms.git"
+  },
+  "author": "Adam Spannbauer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AdamSpannbauer/ml_arms/issues"
+  },
+  "homepage": "https://github.com/AdamSpannbauer/ml_arms#readme",
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-p5js": "^1.0.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}
