@@ -8,7 +8,7 @@ const arms = [];
 const nArms = 1;
 
 let learning = true;
-const learningFrames = 500;
+const learningFrames = 1000;
 
 const armPlacementRadius = 0;
 
