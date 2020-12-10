@@ -55,7 +55,7 @@ function draw() {
 
   arms.forEach((arm) => {
     if (learning) {
-      stroke(0, 10);
+      stroke(0, 5);
       arm.updateRandom();
     } else {
       stroke(0, 200);
