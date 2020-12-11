@@ -7,11 +7,11 @@ const chasingBGColor = [200, 200, 200];
 let resetButton;
 let nJointsSlider;
 let nArmsSlider;
+let learningLenSlider;
 
 let arms;
 
 let learning = true;
-const learningFrames = 500;
 
 const armPlacementRadius = 0;
 
@@ -19,6 +19,10 @@ let t = 0;
 
 function reset() {
   background(learningBGColor);
+
+  if (t > 0) {
+    translate(-width / 2, -height / 2);
+  }
 
   t = 0;
   learning = true;
@@ -48,6 +52,21 @@ function reset() {
 
     arms.push(arm);
   }
+
+  noStroke();
+  fill(0);
+  textSize(12);
+  text('Number of Arms', 10, 25);
+  text('Number of Joints', 10, 65);
+  text('Number of Learning Frames', 10, 105);
+
+  push();
+  textAlign(CENTER);
+  textSize(20);
+  text('Learning Phase', width / 2, height - 12 * 2 - 20);
+  textSize(12);
+  text('The arm\'s joint angles are random.\nEach frame, the joint angles and arm endpoint location is saved.', width / 2, height - 2 * textSize());
+  pop();
 }
 
 function setup() {
@@ -57,9 +76,11 @@ function setup() {
   nArmsSlider.position(10, 30);
   nJointsSlider = createSlider(2, 6, int(random(2, 7)), 1);
   nJointsSlider.position(10, 70);
+  learningLenSlider = createSlider(0, 1000, 500, 100);
+  learningLenSlider.position(10, 110);
 
   resetButton = createButton('Reset');
-  resetButton.position(10, 95);
+  resetButton.position(10, 135);
   resetButton.mouseClicked(reset);
 
   reset();
@@ -67,17 +88,28 @@ function setup() {
 
 function draw() {
   t += 1;
-  if (t > learningFrames) {
+  if (t > learningLenSlider.value()) {
     learning = false;
   }
 
   if (!learning) {
     background(chasingBGColor);
+
+    noStroke();
+    fill(0);
+    textSize(12);
+    text('Number of Arms', 10, 25);
+    text('Number of Joints', 10, 65);
+    text('Number of Learning Frames', 10, 105);
+
+    push();
+    textAlign(CENTER);
+    textSize(20);
+    text('Goal Chasing Phase', width / 2, height - 12 * 4 - 20);
+    textSize(12);
+    text('The arm only knows how to move to a dot (seen in learning phase).\nIf a new location is passed through on the way to a known location,\nthen that location\'s info is saved', width / 2, height - 4 * textSize());
+    pop();
   }
-  noStroke();
-  fill(0);
-  text('Number of Arms', 10, 25);
-  text('Number of Joints', 10, 65);
 
   translate(width / 2, height / 2);
 
