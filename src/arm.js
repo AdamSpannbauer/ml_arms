@@ -1,9 +1,9 @@
 /* eslint-disable import/extensions */
-import armSeg from './armSegment.js';
+import ArmSegment from './armSegment.js';
 import angleUtils from './angleUtils.js';
 import knn from './nnUtils.js';
 
-class Arm {
+export default class Arm {
   constructor(x1, y1, lengths, strokeWeights, gridSize) {
     this.memory = {};
     this.armSegs = [];
@@ -11,10 +11,10 @@ class Arm {
 
     for (let i = 0; i < lengths.length; i += 1) {
       if (i === 0) {
-        this.armSegs.push(new armSeg.ArmSegment(x1, y1, lengths[i], strokeWeights[i]));
+        this.armSegs.push(new ArmSegment(x1, y1, lengths[i], strokeWeights[i]));
       } else {
         const { x2, y2 } = this.armSegs[i - 1];
-        this.armSegs.push(new armSeg.ArmSegment(x2, y2, lengths[i], strokeWeights[i]));
+        this.armSegs.push(new ArmSegment(x2, y2, lengths[i], strokeWeights[i]));
       }
     }
   }
@@ -26,10 +26,18 @@ class Arm {
       y: knn.roundToNearest(lastSeg.y2, this.gridSize),
     };
     const key = `${pos.x},${pos.y}`;
+    const sqError = knn.sqDist(pos.x, pos.y, lastSeg.x2, lastSeg.y2);
+
+    // Don't relearn unless closer to rounded grid point
+    if (
+      key in this.memory
+      && this.memory[key][sqError] <= sqError
+    ) return;
 
     const state = {
       angles: this.armSegs.map((seg) => angleUtils.constrainAngle(seg.angle)),
       pos: { x: lastSeg.x2, y: lastSeg.y2 },
+      sqError,
     };
 
     this.memory[key] = state;
@@ -95,5 +103,3 @@ class Arm {
     });
   }
 }
-
-export default { Arm };

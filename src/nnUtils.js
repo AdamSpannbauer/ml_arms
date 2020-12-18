@@ -27,4 +27,4 @@ const retrieveKClosestMemories = (x, y, memory, k = 1) => {
   return sqDists.slice(0, k);
 };
 
-export default { roundToNearest, retrieveKClosestMemories };
+export default { roundToNearest, retrieveKClosestMemories, sqDist };

@@ -1,4 +1,4 @@
-class ArmSegment {
+export default class ArmSegment {
   constructor(x1, y1, radius, strokeWeight) {
     this.x1 = x1;
     this.y1 = y1;
@@ -37,5 +37,3 @@ class ArmSegment {
     pop();
   }
 }
-
-export default { ArmSegment };
