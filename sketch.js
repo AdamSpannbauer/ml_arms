@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 import Arms from './src/arms.js';
+import Ball from './src/ball.js';
 import LabeledSlider from './src/labeledSlider.js';
 import labelStep from './src/labelStep.js';
 
@@ -7,6 +8,7 @@ const learningBGColor = [250, 250, 250];
 const chasingBGColor = [200, 200, 200];
 
 let arms;
+let ball;
 let t = 0;
 
 let resetButton;
@@ -37,6 +39,8 @@ function reset() {
 
   t = 0;
   arms = new Arms(nArmsSlider.value(), nJointsSlider.value());
+  ball = new Ball();
+
   sliders.forEach((s) => s.draw());
   labelStep(arms.learning);
 }
@@ -68,7 +72,14 @@ function draw() {
   }
 
   translate(width / 2, height / 2);
-  arms.updateAndDraw(true);
+  if (!arms.learning) {
+    ball.update();
+    ball.draw();
+  }
+
+  // const [goalX, goalY] = [mouseX - width / 2, mouseY - height / 2];
+  const [goalX, goalY] = [ball.x, ball.y];
+  arms.updateAndDraw({ goalX, goalY, drawKnowledge: true });
 }
 
 window.setup = setup;

@@ -30,14 +30,14 @@ export default class Arms {
     }
   }
 
-  updateAndDraw(drawKnowledge) {
+  updateAndDraw({ goalX = mouseX, goalY = mouseY, drawKnowledge = true }) {
     this.arms.forEach((arm) => {
       if (this.learning) {
         stroke(0, 5);
         arm.updateRandom();
       } else {
         stroke(0, 200);
-        arm.updateGoal(mouseX - width / 2, mouseY - height / 2);
+        arm.updateGoal(goalX, goalY);
       }
       arm.draw();
 
