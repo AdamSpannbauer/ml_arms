@@ -23,7 +23,7 @@ const nArmsSliderParams = {
 };
 
 const nJointsSliderParams = {
-  min: 2, max: 6, value: Math.floor(Math.random() * 5 + 2), step: 1, posX: 10, posY: 70, label: 'Number of Joints',
+  min: 2, max: 6, value: 5, step: 1, posX: 10, posY: 70, label: 'Number of Joints',
 };
 
 const learningLenSliderParams = {
@@ -74,12 +74,30 @@ function draw() {
   translate(width / 2, height / 2);
   if (!arms.learning) {
     ball.update();
-    ball.draw();
   }
 
-  // const [goalX, goalY] = [mouseX - width / 2, mouseY - height / 2];
-  const [goalX, goalY] = [ball.x, ball.y];
+  const [goalX, goalY] = [ball.p.x, ball.p.y];
   arms.updateAndDraw({ goalX, goalY, drawKnowledge: true });
+
+  if (!arms.learning) {
+    const armEndPoints = arms.endPoints();
+    let isTouched = false;
+    armEndPoints.forEach(({ x, y }) => {
+      const touching = dist(x, y, ball.p.x, ball.p.y) <= ball.r;
+      isTouched = touching || isTouched;
+    });
+
+    push();
+    noStroke();
+    fill(0, 100);
+
+    if (isTouched) {
+      fill(100, 200, 100, 100);
+    }
+
+    ball.draw();
+    pop();
+  }
 }
 
 window.setup = setup;

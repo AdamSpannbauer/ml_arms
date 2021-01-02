@@ -30,6 +30,13 @@ export default class Arms {
     }
   }
 
+  endPoints() {
+    return this.arms.map((arm) => {
+      const lastSeg = arm.armSegs[arm.armSegs.length - 1];
+      return createVector(lastSeg.x2, lastSeg.y2);
+    });
+  }
+
   updateAndDraw({ goalX = mouseX, goalY = mouseY, drawKnowledge = true }) {
     this.arms.forEach((arm) => {
       if (this.learning) {
