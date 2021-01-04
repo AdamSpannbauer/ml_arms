@@ -2,15 +2,17 @@
 
 ## 💪s that teach themselves motor skills right before your 👀
 
-The arm(s) that can be seen in [the app/animation](https://adamspannbauer.github.io/ml_arms/) are created on page load.  The number of segments and the lengths of those segments are random.  The number of arms and arm segments can be adjusted by sliders.
+The arm(s) that can be seen in [the app/animation](https://adamspannbauer.github.io/ml_arms/) are created on page load.  The number of arms, number of arm segments, and 'learning' time can be adjusted by the sliders in the upper left.
 
-### Phase 1 - Learning
+### Phase 1 - Learning Phase
 
-When the page loads, the arm(s) do not know how to move to specific locations.  The arm(s) have a 'childhood' where the joint angles are randomly updated so that the arm(s) is flailing around.  During this random movement, the arm is repeatedly saving 2 pieces of information: what location the end of the arm is at & what joint angles lead to that position.  This information (aka the arm's 'knowledge') is displayed as dots on screen; the arm only knows how to position itself to move to a dot, the arm does not know how to move anywhere besides the dots.
+When the page loads, the arms do not know how to move to specific locations.  The arms have a 'childhood' where the joint angles are randomly updated so that the arms are flailing around.  During this random movement, the arms are repeatedly saving 2 pieces of information: (1) what location the end of the arm is at & (2) what joint angles lead to that position.  This information (i.e. the arm's 'knowledge') is displayed as the dots on the screen; the arms only know how to position themselves to move to a previously visited dot, the arms do not know how to move anywhere but the dots.
 
-### Phase 2 - Reaching
+### Phase 2 - Goal Chasing Phase
 
-After the learning phase the arm is programmed to try and reach out the mouse location.  The arm still only knows how to move to the dotted locations; however, the arm can't jump to one of these locations, the joint angles are incrementally adjusted to move towards the known location.  During this movement to a new location, the arm might pass through a new location, if this occurs, the location is saved to memory for potential future use.
+After the learning phase the arms are programmed to try and reach out to the ball that appears on screen.  The arms still only know how to move to the dot locations.  However, the arms cannot jump to these locations; the joint angles are incrementally adjusted to move towards the known location.  During this incremental adjustment, the arms might pass through new locations.  If a new location is visited, it is saved as a known location for potential future use (see more details section for more info).
+
+The ball that the arm reaches towards will follow the mouse, or move randomly if a mouse location is not available (or if the mouse location is too far away from the arm).
 
 ### More details on the process
 
