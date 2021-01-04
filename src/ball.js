@@ -4,7 +4,7 @@ export default class Ball {
     this.p = createVector();
 
     this.goal = createVector();
-    this.speedLimit = 5;
+    this.speedLimit = 2;
 
     this.noiseSeed = random(100);
     this.noiseStep = 0.005;
@@ -25,7 +25,7 @@ export default class Ball {
       const y = sin(a) * r;
 
       this.goal.set(x, y);
-      this.speedLimit = 5;
+      this.speedLimit = 2;
     } else {
       this.goal.set(mouseX - cx, mouseY - cy);
       this.speedLimit = 10;
