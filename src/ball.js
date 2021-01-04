@@ -35,6 +35,7 @@ export default class Ball {
   update() {
     this.updateGoal();
 
+    // eslint-disable-next-line no-undef
     const v = p5.Vector.sub(this.goal, this.p);
     v.limit(this.speedLimit);
     this.p.add(v);
