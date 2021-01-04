@@ -12,6 +12,8 @@ let ball;
 let t = 0;
 
 let resetButton;
+let seeDocsButton;
+const readmeURL = 'https://github.com/AdamSpannbauer/ml_arms/blob/main/README.md#ml-arms';
 let sliders;
 
 let nArmsSlider;
@@ -57,6 +59,11 @@ function setup() {
   resetButton = createButton('Reset');
   resetButton.position(10, 140);
   resetButton.mouseClicked(reset);
+
+  // eslint-disable-next-line no-undef
+  seeDocsButton = createButton('How it Works');
+  seeDocsButton.position(10, 167);
+  seeDocsButton.mouseClicked(() => window.open(readmeURL, '_blank'));
 
   reset();
 }
